@@ -1,6 +1,6 @@
 class Song
   @@all = []
-  attr_accessor :name
+  attr_accessor :name, :artist_name
   
   def self.all
     @@all
@@ -50,7 +50,27 @@ def self.alphabetical
   @@all.sort_by do |song|
     song.name
   end.uniq
+end
 
+def self.new_from_filename(filename)
+  filename = filename.split('.')[0]
+  songName = filename.split("- ")[1]
+  newSong = Song.new
+  newSong.artist_name = filename.split("- ")[0].split(" ")[0]
+  newSong.name = songName
+  newSong
+end
+
+def self.create_from_filename(filename)
+  filename = filename.split('.')[0]
+  songName = filename.split("- ")[1]
+  newSong = Song.new
+  newSong.artist_name = filename.split("- ")[0].split(" ")[0]
+  newSong.name = songName
+  @@all << newSong
+
+
+  newSong 
 end
 
 
